@@ -4,6 +4,9 @@ from fastapi import FastAPI, File, HTTPException
 
 app = FastAPI()
 
+# <To improve efficiency, ensure that only what is required is
+#  in the /run/ method. E.g., consider loading models here.>
+
 @app.put("/run/")
 async def infer(input: bytes = File()):
 
@@ -23,13 +26,15 @@ async def infer(input: bytes = File()):
         #   json_input = json.loads(input.decode("utf-8"))
         #   img_data = json_input["image"].encode()
         #   content = base64.b64decode(img_data)
-
-
+        #
         # <PARSE `input`>
         # <PROCESS `input`>
         # <RETURN RESULT OF `input` PROCESS>
-
+        #
+        # The format of the result can be anything returnable from a FastAPI
+        # endpoint. E.g.:
 
         return {"results": "CALCULATED RESULT"}
-    except:
-        raise HTTPException(422, "Your input could not be processed")
+    
+    except Exception as e:
+        raise HTTPException(422, f"Your input could not be parsed: {e}")
