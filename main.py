@@ -31,5 +31,6 @@ async def infer(input: bytes = File()):
 
 
         return {"results": "CALCULATED RESULT"}
-    except:
-        raise HTTPException(422, "Your input could not be processed")
+    
+    except Exception as e:
+        raise HTTPException(422, f"Your input could not be parsed: {e}")
