@@ -1,5 +1,7 @@
 from fastapi import FastAPI, File, HTTPException
 
+# Please see https://dhali.io/docs/#/ for more info
+
 # <ADD DEPENDENCIES>
 
 app = FastAPI()
@@ -17,12 +19,16 @@ async def infer(input: bytes = File()):
         #   text=input.decode("utf-8")
         #
         # If `input` is a json object:
+        #   import json
         #   json_input = json.loads(input.decode("utf-8"))
         #
         # If `input` is an image:
+        #   from PIL import Image
         #   image = Image.open(io.BytesIO(input))
         #
         # If `input` is an image base64 embedded into a json:
+        #   import json
+        #   import base64
         #   json_input = json.loads(input.decode("utf-8"))
         #   img_data = json_input["image"].encode()
         #   content = base64.b64decode(img_data)
